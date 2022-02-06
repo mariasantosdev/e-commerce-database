@@ -1,5 +1,6 @@
 package com.ecommercebd.plan.domain;
 
+import com.ecommercebd.product.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +31,8 @@ public class Plan {
     private int limitOfConnections;
     @Positive
     private int limitOfUsers;
+    @ManyToOne
+    private Product product;
 
     public Plan(BigDecimal price, String name, String description, String characteristic, Long storage,
                 int limitOfConnections, int limitOfUsers) {
