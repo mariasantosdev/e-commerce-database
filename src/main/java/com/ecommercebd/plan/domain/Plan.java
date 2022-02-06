@@ -32,6 +32,8 @@ public class Plan {
     @Positive
     private int limitOfUsers;
     @ManyToOne
+    @JoinColumn(name = "product_id",
+            foreignKey = @ForeignKey(name = "fk_plan_product_id"))
     private Product product;
 
     public Plan(BigDecimal price, String name, String description, String characteristic, Long storage,

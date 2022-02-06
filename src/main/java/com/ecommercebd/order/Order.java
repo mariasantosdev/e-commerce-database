@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "`order`")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +18,14 @@ public class Order {
     private BigDecimal subtotal;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "fk_order_customer_id"))
+    @JoinColumn(name = "customer_id", 
+            foreignKey = @ForeignKey(name = "fk_order_customer_id"))
     private User customer;
     @ManyToMany
     @JoinTable(name = "order_plans",
-            joinColumns = @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "fk_order_customer_id")),
-            inverseJoinColumns = @JoinColumn(name = "plan_id", foreignKey = @ForeignKey(name = "fk_order_customer_id")))
+            joinColumns = @JoinColumn(name = "order_id", 
+                    foreignKey = @ForeignKey(name = "fk_order_plans_order_id")),
+            inverseJoinColumns = @JoinColumn(name = "plan_id", 
+                    foreignKey = @ForeignKey(name = "fk_order_plans_plan_id")))
     private List<Plan> plans = new ArrayList<>();
 }
