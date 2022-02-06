@@ -43,6 +43,8 @@ class PlanController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+        //TODO retornar o nome do produto ao salvar um plano
+            //TODO alterar esse método create para retornar PlanResponse
     //TODO Ta dando 500 ao cadastrar duas vezes o mesmo registro - tratar
     Plan create(@RequestBody @Valid NewPlanRequest newPlanRequest) {
        return planRepository.save(mapper.map(newPlanRequest, Plan.class));

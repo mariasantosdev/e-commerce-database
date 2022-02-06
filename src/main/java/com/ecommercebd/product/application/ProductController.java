@@ -58,6 +58,4 @@ class ProductController {
 
 		productRepository.delete(product);
 	}
-
-	
 }

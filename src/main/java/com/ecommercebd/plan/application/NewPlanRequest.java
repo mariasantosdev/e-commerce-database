@@ -37,6 +37,7 @@ class NewPlanRequest {
     @JsonProperty
     @Positive(message = "Por favor insira um número de limite de usuários válido")
     private int limitOfUsers;
+    private ProductId product;
 
     Plan toEntity() {
         return new Plan(price, name, description, characteristic, storage, limitOfConnections, limitOfUsers);

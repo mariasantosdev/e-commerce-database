@@ -1,5 +1,6 @@
 package com.ecommercebd.plan.application;
 
+import com.ecommercebd.product.application.ProductResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,5 @@ class PlanResponse {
     private Long storage;
     private int limitOfConnections;
     private int limitOfUsers;
+    private ProductResponse product;
 }
