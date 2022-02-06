@@ -1,4 +1,4 @@
-package com.ecommercebd.product;
+package com.ecommercebd.product.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

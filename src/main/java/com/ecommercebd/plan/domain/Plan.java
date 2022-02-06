@@ -1,6 +1,6 @@
 package com.ecommercebd.plan.domain;
 
-import com.ecommercebd.product.Product;
+import com.ecommercebd.product.domain.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
