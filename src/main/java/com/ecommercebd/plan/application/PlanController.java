@@ -4,6 +4,8 @@ import com.ecommercebd.exception.NotFoundException;
 import com.ecommercebd.mapper.Mapper;
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.plan.domain.PlanRepository;
+import com.ecommercebd.product.domain.Product;
+import com.ecommercebd.product.domain.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,7 @@ class PlanController {
 
     private final PlanRepository planRepository;
     private final Mapper mapper;
+    private final ProductRepository productRepository;
 
     @GetMapping
     List<PlanResponse> findAll() {
@@ -43,11 +46,20 @@ class PlanController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-        //TODO retornar o nome do produto ao salvar um plano
             //TODO alterar esse método create para retornar PlanResponse
     //TODO Ta dando 500 ao cadastrar duas vezes o mesmo registro - tratar
-    Plan create(@RequestBody @Valid NewPlanRequest newPlanRequest) {
-       return planRepository.save(mapper.map(newPlanRequest, Plan.class));
+    PlanResponse create(@RequestBody @Valid NewPlanRequest newPlanRequest) {
+        Plan plan = mapper.map(newPlanRequest, Plan.class);
+
+        Product product = plan.getProduct();
+        Long productId = product.getId();
+
+        product = productRepository.findById(productId)
+                .orElseThrow(() -> new BusinessException(String.format("Produto do plano %s não encontrado", productId)));
+
+        plan.setProduct(product);
+        planRepository.save(plan);
+        return this.mapper.map(plan, PlanResponse.class);
     }
 
     @PutMapping("{planId}")

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -37,6 +38,8 @@ class NewPlanRequest {
     @JsonProperty
     @Positive(message = "Por favor insira um número de limite de usuários válido")
     private int limitOfUsers;
+    @NotNull
+    @Valid
     private ProductId product;
 
     Plan toEntity() {
