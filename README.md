@@ -15,7 +15,7 @@ E-commerce para realizar a venda de diversos banco de dados
 
 📄 Documentação:
 - Diagrama de Classe:
-![imagem com diagrama de classe do projeto](https://github.com/mariasantosdev/e-commerce-database/blob/main/docs/classDiagram.svg)
+![imagem com diagrama de classe do projeto](https://github.com/mariasantosdev/e-commerce-database/blob/master/docs/classDiagram.svg)
 
 - Diagrama de Caso de uso:
-![imagem com diagrama de caso de uso](https://github.com/mariasantosdev/e-commerce-database/blob/main/docs/useCaseDiagram.svg)
+![imagem com diagrama de caso de uso](https://github.com/mariasantosdev/e-commerce-database/blob/master/docs/useCaseDiagram.svg)
