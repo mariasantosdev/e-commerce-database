@@ -1,0 +1,154 @@
+openapi: 3.0.0
+
+info:
+  title: LoveLace
+  version: '1.0'
+  description: >-
+    REST API da plataforma de ecommerce de banco de dados
+  contact:
+    email: contato@lovelace.com
+    name: LoveLace
+    url: 'https://www.lovelace.com'
+
+servers:
+  - description: Ambiente local de desenvolvimento
+    url: 'http://localhost:8080'
+  - description: Ambiente de produção
+    url: 'https://api.lovelace.com'
+
+components:
+  schemas: 
+    Page:
+      type: object
+      required:
+        - number
+        - size
+        - totalPages
+        - totalElements
+        - content
+      properties:
+        number:
+          type: integer
+          format: int32
+          example: 2
+        size:
+          type: number
+          format: int32
+          example: 9
+        totalPages:
+          type: integer
+          format: int32
+          example: 15
+        totalElements:
+          type: number
+          format: int32
+          example: 442
+    ProblemObject:
+      type: object
+      required:
+        - type
+        - userMessage
+      properties:
+        name:
+          type: string
+          example: amount
+        userMessage:
+          type: string
+          example: O valor é obrigatório
+      title: ProblemObject
+    Problem:
+      title: Problem
+      type: object
+      required:
+        - status
+        - timestamp
+        - type
+        - title
+        - detail
+      description: >
+        Representa um problema na comunicação com a API.
+        Este modelo de representação é baseado na RFC 7807 (Problem Details for HTTP APIs)
+      properties:
+        status:
+          type: integer
+          format: int32
+          example: 400
+        timestamp:
+          type: string
+          format: date-time
+          example: '2020-12-01T18:09:02Z'
+        type:
+          type: string
+          example: 'https://alganews.com.br/dados-invalidos'
+        title:
+          type: string
+          example: Dados inválidos
+        detail:
+          type: string
+          example: Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.
+        # userMessage:
+        #   type: string
+        #   example: Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.
+        objects:
+          type: array
+          description: Lista de objetos ou campos que geraram o erro (opcional)
+          items:
+            $ref: '#/components/schemas/ProblemObject'
+    ProductResponse:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: 'Maria db'
+    
+    NewProductRequest:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Maria db'
+
+  responses:
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/Problem'
+    BadRequest:
+      description: Requisição inválida
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/Problem'       
+
+paths:
+  /products:
+    get:
+      operationId: getProducts
+      summary: Listagem de produtos
+      tags: 
+        - Products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponse'
+
+tags:
+  - name: Products
+    description: Produtos
+      
