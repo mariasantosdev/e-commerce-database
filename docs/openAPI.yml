@@ -8,7 +8,7 @@ info:
   contact:
     email: contato@lovelace.com
     name: LoveLace
-    url: 'https://www.lovelace.com'
+    url: 'https://lovelace.com'
 
 servers:
   - description: Ambiente local de desenvolvimento
@@ -79,7 +79,7 @@ components:
           example: '2020-12-01T18:09:02Z'
         type:
           type: string
-          example: 'https://alganews.com.br/dados-invalidos'
+          example: 'https://lovelace.com/dados-invalidos'
         title:
           type: string
           example: Dados inválidos
@@ -125,6 +125,15 @@ components:
           type: integer
           format: int64
           example: 1
+
+    UpdateProductRequest:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Maria db'
 
     NewOrderRequest:
       required:
@@ -200,6 +209,78 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProductResponse'
+    post:
+      operationId: postProducts
+      summary: Cadastro de produtos
+      tags:
+        - Products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProductRequest'
+      responses:
+        '201':
+          description: Produto criado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /products/{productId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: productId
+        in: path
+        required: true
+    get:
+      operationId: getProduct
+      summary: Busca um produto
+      tags:
+        - Products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: putProducts
+      summary: Atualização de Produtos
+      tags:
+        - Products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        '200':
+          description: Produto atualizado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      operationId: deleteProduct
+      summary: Deleta um produto
+      tags:
+        - Products
+      responses:
+        '204':
+          description: Produto deletado
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   /orders:
     post:
       operationId: postOrders
