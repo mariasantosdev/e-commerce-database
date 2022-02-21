@@ -116,6 +116,59 @@ components:
         name:
           type: string
           example: 'Maria db'
+    PlanId:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+
+    NewOrderRequest:
+      required:
+        - plans
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanId'
+
+    OrderResponse:
+      required:
+        - id
+        - subtotal
+        - customer
+        - plans
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        subtotal:
+          type: number
+          format: double
+          example: 10.8
+        customer:
+          $ref: '#/components/schemas/CustomerId'
+        plans: 
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanId' 
+
+
+    CustomerId:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
 
   responses:
     NotFound:
@@ -147,8 +200,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProductResponse'
+  /orders:
+    post:
+      operationId: postOrders
+      summary: Cadastro de Pedidos
+      tags:
+        - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrderRequest'
+      responses:
+        '201':
+          description: Pedido criado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
 
 tags:
   - name: Products
     description: Produtos
-      
+  - name: Orders
+    description: Pedidos  
