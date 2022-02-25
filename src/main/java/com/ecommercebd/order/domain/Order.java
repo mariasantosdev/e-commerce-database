@@ -1,7 +1,7 @@
-package com.ecommercebd.order;
+package com.ecommercebd.order.domain;
 
 import com.ecommercebd.plan.domain.Plan;
-import com.ecommercebd.user.User;
+import com.ecommercebd.user.domain.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

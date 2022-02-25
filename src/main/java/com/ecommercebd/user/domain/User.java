@@ -1,4 +1,4 @@
-package com.ecommercebd.user;
+package com.ecommercebd.user.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
