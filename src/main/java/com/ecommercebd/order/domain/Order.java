@@ -2,6 +2,9 @@ package com.ecommercebd.order.domain;
 
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.user.domain.User;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "`order`")
 public class Order {
     @Id
