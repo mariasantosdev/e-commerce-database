@@ -65,5 +65,11 @@ public class OrderController {
     }
 
     //TODO Delete Order
+    @DeleteMapping("{orderId}")
+    void delete(@PathVariable Long orderId){
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new NotFoundException("Pedido não localizado"));
+        orderRepository.delete(order);
+    }
 
 }
