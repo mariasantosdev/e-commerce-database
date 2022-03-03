@@ -135,6 +135,21 @@ components:
           type: string
           example: 'Maria db'
 
+    UpdateOrderRequest:
+      required:
+        - subtotal
+        - customer
+      type: object
+      properties:
+        subtotal:
+          type: number
+          format: double
+          example: 10.8
+        customer:     
+          type: integer
+          format: int64
+          example: 1
+          
     NewOrderRequest:
       required:
         - plans
@@ -358,7 +373,7 @@ paths:
                   $ref: '#/components/schemas/OrderResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
-
+    
     delete:
       operationId: deleteOrder
       summary: Deleta um pedido

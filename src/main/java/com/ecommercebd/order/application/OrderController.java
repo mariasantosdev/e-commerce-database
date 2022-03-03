@@ -64,7 +64,6 @@ public class OrderController {
         return this.mapper.map(order, OrderResponse.class);
     }
 
-    //TODO Delete Order
     @DeleteMapping("{orderId}")
     void delete(@PathVariable Long orderId){
         Order order = orderRepository.findById(orderId)
