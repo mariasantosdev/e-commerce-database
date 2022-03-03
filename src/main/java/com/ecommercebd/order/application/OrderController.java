@@ -54,9 +54,6 @@ public class OrderController {
 
     }
 
-
-
-
     @PutMapping("/{orderId}")
     OrderResponse update(@PathVariable Long orderId, @RequestBody @Valid NewOrderRequest newOrderRequest){
         final Order order = orderRepository.findById(orderId)
@@ -64,7 +61,6 @@ public class OrderController {
 
         this.mapper.map(newOrderRequest, order);
         this.orderRepository.save(order);
-
         return this.mapper.map(order, OrderResponse.class);
     }
 
