@@ -152,9 +152,19 @@ components:
           
     NewOrderRequest:
       required:
+        - subtotal
+        - customer
         - plans
       type: object
       properties:
+        subtotal:
+          type: number
+          format: double
+          example: 250.40
+        customer:     
+          type: integer
+          format: int64
+          example: 1
         plans:
           type: array
           items:
@@ -211,7 +221,7 @@ paths:
   /products:
     get:
       operationId: getProducts
-      summary: Listagem de produtos
+      summary: Listagem de Produtos
       tags: 
         - Products
       responses:
@@ -225,7 +235,7 @@ paths:
                   $ref: '#/components/schemas/ProductResponse'
     post:
       operationId: postProducts
-      summary: Cadastro de produtos
+      summary: Cadastro de Produtos
       tags:
         - Products
       requestBody:
@@ -253,7 +263,7 @@ paths:
         required: true
     get:
       operationId: getProduct
-      summary: Busca um produto
+      summary: Busca um Produto
       tags:
         - Products
       responses:
@@ -286,7 +296,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
     delete:
       operationId: deleteProduct
-      summary: Deleta um produto
+      summary: Deleta um Produto
       tags:
         - Products
       responses:
@@ -356,7 +366,7 @@ paths:
     
     put:
       operationId: putOrders
-      summary: Atualização de Pedidos
+      summary: Atualização de Pedido
       tags:
         - Orders
       requestBody:
@@ -376,7 +386,7 @@ paths:
     
     delete:
       operationId: deleteOrder
-      summary: Deleta um pedido
+      summary: Deleta um Pedido
       tags:
         - Orders
       responses:
