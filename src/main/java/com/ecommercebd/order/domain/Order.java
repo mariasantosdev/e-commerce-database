@@ -2,6 +2,7 @@ package com.ecommercebd.order.domain;
 
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.user.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

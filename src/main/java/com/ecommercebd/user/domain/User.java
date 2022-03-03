@@ -1,11 +1,15 @@
 package com.ecommercebd.user.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "`user`")
@@ -19,4 +23,6 @@ public class User {
     private String cpf;
     @Enumerated(EnumType.ORDINAL)
     private Role role;
+
+
 }

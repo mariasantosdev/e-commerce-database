@@ -1,11 +1,11 @@
 package com.ecommercebd.order.application;
 
 import com.ecommercebd.user.application.UserResponse;
-import com.ecommercebd.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Getter

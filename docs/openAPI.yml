@@ -168,7 +168,6 @@ components:
           items:
             $ref: '#/components/schemas/PlanId' 
 
-
     CustomerId:
       required:
         - id
@@ -282,6 +281,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 
   /orders:
+    get:
+      operationId: getOrders
+      summary: Listagem de Pedidos
+      tags: 
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+
     post:
       operationId: postOrders
       summary: Cadastro de Pedidos
@@ -301,6 +315,63 @@ paths:
                   $ref: '#/components/schemas/OrderResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /orders/{orderId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: orderId
+        in: path
+        required: true
+    get:
+      operationId: getOrders
+      summary: Busca um Pedido
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    
+    put:
+      operationId: putOrders
+      summary: Atualização de Pedidos
+      tags:
+        - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Pedido atualizado
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+    delete:
+      operationId: deleteOrder
+      summary: Deleta um pedido
+      tags:
+        - Orders
+      responses:
+        '204':
+          description: Pedido deletado
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+
+  
 
 tags:
   - name: Products

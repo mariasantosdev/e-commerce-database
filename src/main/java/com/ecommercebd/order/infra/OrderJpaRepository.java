@@ -11,4 +11,6 @@ public interface OrderJpaRepository extends JpaRepository<Order, Long>, OrderRep
 
    @EntityGraph(attributePaths = {"customer"})
     List<Order> findAll();
+
+
 }
