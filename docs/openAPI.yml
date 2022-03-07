@@ -17,7 +17,7 @@ servers:
     url: 'https://api.lovelace.com'
 
 components:
-  schemas: 
+  schemas:
     Page:
       type: object
       required:
@@ -100,7 +100,7 @@ components:
         - name
       type: object
       properties:
-        id: 
+        id:
           type: integer
           format: int64
           example: 1
@@ -145,11 +145,11 @@ components:
           type: number
           format: double
           example: 10.8
-        customer:     
+        customer:
           type: integer
           format: int64
           example: 1
-          
+
     NewOrderRequest:
       required:
         - subtotal
@@ -161,7 +161,7 @@ components:
           type: number
           format: double
           example: 250.40
-        customer:     
+        customer:
           type: integer
           format: int64
           example: 1
@@ -188,10 +188,10 @@ components:
           example: 10.8
         customer:
           $ref: '#/components/schemas/CustomerId'
-        plans: 
+        plans:
           type: array
           items:
-            $ref: '#/components/schemas/PlanId' 
+            $ref: '#/components/schemas/PlanId'
 
     CustomerId:
       required:
@@ -209,20 +209,20 @@ components:
       content:
         application/json:
           schema:
-              $ref: '#/components/schemas/Problem'
+            $ref: '#/components/schemas/Problem'
     BadRequest:
       description: Requisição inválida
       content:
         application/json:
           schema:
-              $ref: '#/components/schemas/Problem'       
+            $ref: '#/components/schemas/Problem'
 
 paths:
   /products:
     get:
       operationId: getProducts
       summary: Listagem de Produtos
-      tags: 
+      tags:
         - Products
       responses:
         '200':
@@ -249,7 +249,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/ProductResponse'
+                $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
 
@@ -291,7 +291,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/ProductResponse'
+                $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
     delete:
@@ -309,7 +309,7 @@ paths:
     get:
       operationId: getOrders
       summary: Listagem de Pedidos
-      tags: 
+      tags:
         - Orders
       responses:
         '200':
@@ -337,7 +337,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/OrderResponse'
+                $ref: '#/components/schemas/OrderResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
 
@@ -350,7 +350,7 @@ paths:
         in: path
         required: true
     get:
-      operationId: getOrders
+      operationId: getOrder
       summary: Busca um Pedido
       tags:
         - Orders
@@ -380,7 +380,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/OrderResponse'
+                $ref: '#/components/schemas/OrderResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
     
@@ -396,7 +396,7 @@ paths:
           $ref: '#/components/responses/NotFound'
 
 
-  
+
 
 tags:
   - name: Products
