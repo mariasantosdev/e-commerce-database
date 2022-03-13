@@ -1,7 +1,9 @@
 package com.ecommercebd.order.application;
 
+import com.ecommercebd.order.domain.Order;
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.user.domain.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +24,14 @@ import java.util.List;
 public class NewOrderRequest {
 
     @DecimalMin(value = "0.1")
+    @NotNull(message = "Subtotal invalido")
+    @JsonProperty
     private BigDecimal subtotal;
     @NotNull  @Valid
     private User customer;
     @NotNull  @Valid
     private List<Plan> plans = new ArrayList<>();
+
+
+
 }

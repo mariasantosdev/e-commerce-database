@@ -5,6 +5,8 @@ import com.ecommercebd.mapper.Mapper;
 import com.ecommercebd.order.domain.Order;
 import com.ecommercebd.order.domain.OrderRepository;
 import com.ecommercebd.plan.application.BusinessException;
+import com.ecommercebd.plan.domain.Plan;
+import com.ecommercebd.plan.domain.PlanRepository;
 import com.ecommercebd.user.domain.User;
 import com.ecommercebd.user.domain.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class OrderController {
     private final Mapper mapper;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final PlanRepository planRepository;
 
     @GetMapping
     List<OrderResponse> findAll(){
@@ -37,6 +40,7 @@ public class OrderController {
                 .orElseThrow(() -> new NotFoundException("Pedido não encontrado."));
     }
 
+    //TODO Adicionar o cadastro de um plano quando realizar o pedido
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     OrderResponse create(@RequestBody @Valid NewOrderRequest newOrderRequest){
@@ -55,7 +59,8 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    OrderResponse update(@PathVariable Long orderId, @RequestBody @Valid NewOrderRequest newOrderRequest){
+    OrderResponse update(@PathVariable Long orderId,
+                         @RequestBody @Valid NewOrderRequest newOrderRequest){
         final Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new NotFoundException("Pedido não localizado."));
 
