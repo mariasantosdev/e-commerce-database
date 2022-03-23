@@ -296,6 +296,147 @@ components:
           enum: [ADMIN, CLIENT]
           example: 'ADMIN'
     
+    PlanResponse:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1   
+
+    NewPlanRequest:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1 
+
+    UpdatePlanRequest:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1             
+        
 
 
   responses:
@@ -579,6 +720,94 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'      
 
+  /plan: 
+    get:
+      operationId: getPlans
+      summary: Listagem de Planos
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanResponse'      
+    post:
+      operationId: postPlans
+      summary: Cadastro de Planos
+      tags:
+        - Plans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPlanRequest'
+      responses:
+        '201':
+          description: Plano criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /plan/{planId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: planId
+        in: path
+        required: true
+    get:
+      operationId: getPlan
+      summary: Busca um Plano
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      operationId: putPlans
+      summary: Atualização de Plano
+      tags:
+        - Plans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanRequest'
+      responses:
+        '200':
+          description: Plano atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    
+    delete:
+      operationId: deletePlan
+      summary: Deleta um Plano
+      tags:
+        - Plans
+      responses:
+        '204':
+          description: Plano deletado
+        '404':
+          $ref: '#/components/responses/NotFound'              
 
 
 tags:
@@ -586,10 +815,10 @@ tags:
     description: Produtos
   - name: Orders
     description: Pedidos  
-  - name: Plan
-    description: Plano  
+  - name: Plans
+    description: Planos  
   - name: Users
     description: Usuarios
-  - name: Payment
-    description: Pagamento
+  - name: Payments
+    description: Pagamentos
        
