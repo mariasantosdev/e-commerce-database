@@ -21,17 +21,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewOrderRequest {
+class NewOrderRequest {
 
     @DecimalMin(value = "0.1")
-    @NotNull(message = "Subtotal invalido")
+    @NotNull(message = "Subtotal inválido")
     @JsonProperty
     private BigDecimal subtotal;
     @NotNull  @Valid
     private User customer;
     @NotNull  @Valid
-    private List<Plan> plans = new ArrayList<>();
-
+    private PlanId plan;
 
 
 }

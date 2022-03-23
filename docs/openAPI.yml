@@ -203,6 +203,101 @@ components:
           format: int64
           example: 1
 
+    UserResponse:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'CLIENT' 
+
+    NewUserRequest:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'CLIENT'
+
+    UpdateUserRequest:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'ADMIN'
+    
+
+
   responses:
     NotFound:
       description: Recurso não encontrado
@@ -395,6 +490,94 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /user: 
+    get:
+      operationId: getUsers
+      summary: Listagem de Usuarios
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'      
+    post:
+      operationId: postUsers
+      summary: Cadastro de Usuarios
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUserRequest'
+      responses:
+        '201':
+          description: Usuario criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /user/{userId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: userId
+        in: path
+        required: true
+    get:
+      operationId: getUser
+      summary: Busca um Usuario
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      operationId: putUsers
+      summary: Atualização de Usuario
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Usuario atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    
+    delete:
+      operationId: deleteUser
+      summary: Deleta um usuario
+      tags:
+        - Users
+      responses:
+        '204':
+          description: Usuario deletado
+        '404':
+          $ref: '#/components/responses/NotFound'      
 
 
 
@@ -403,3 +586,10 @@ tags:
     description: Produtos
   - name: Orders
     description: Pedidos  
+  - name: Plan
+    description: Plano  
+  - name: Users
+    description: Usuarios
+  - name: Payment
+    description: Pagamento
+       

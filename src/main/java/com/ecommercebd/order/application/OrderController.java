@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/orders")
-public class OrderController {
+class OrderController {
 
     private final Mapper mapper;
     private final OrderRepository orderRepository;
@@ -52,7 +52,20 @@ public class OrderController {
         customer = userRepository.findById(customerId)
                 .orElseThrow(() -> new BusinessException(String.format("Usuário não encontrado", customerId)));
 
+
+        Plan plans = (Plan) order.getPlans();
+        Long planId = plans.getId();
+
+
+        //List<Plan> plans = order.getPlans();
+        //List<Plan> planId = plans.get
+
+        plans = planRepository.findById(planId)
+                .orElseThrow(() -> new BusinessException(String.format("Plano não encontrado", planId)));
+
         order.setCustomer(customer);
+        order.setPlans((List<Plan>) plans);
+
         orderRepository.save(order);
         return this.mapper.map(order, OrderResponse.class);
 
