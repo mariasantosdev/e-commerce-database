@@ -30,7 +30,7 @@ class NewOrderRequest {
     @NotNull  @Valid
     private User customer;
     @NotNull  @Valid
-    private PlanId plan;
+    private List<Plan> plans = new ArrayList<>();
 
 
 }

@@ -29,7 +29,7 @@ public class Order {
     @JoinColumn(name = "customer_id", 
             foreignKey = @ForeignKey(name = "fk_order_customer_id"))
     private User customer;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_plans",
             joinColumns = @JoinColumn(name = "order_id", 
                     foreignKey = @ForeignKey(name = "fk_order_plans_order_id")),
