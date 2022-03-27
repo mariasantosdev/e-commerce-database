@@ -35,7 +35,6 @@ class PlanController {
         return planRepository.findAll()
                 .stream()
                 .map(p -> mapper.map(p, PlanResponse.class)).toList();
-        System.out.println("teste");
     }
 
     @GetMapping("{planId}")
