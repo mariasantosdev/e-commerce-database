@@ -3,13 +3,13 @@ package com.ecommercebd.user.application;
 
 import com.ecommercebd.exception.NotFoundException;
 import com.ecommercebd.mapper.Mapper;
+import com.ecommercebd.user.domain.User;
 import com.ecommercebd.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,6 +34,11 @@ class UserController {
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado."));
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    User create(@RequestBody @Valid NewUserRequest newUserRequest){
+        return userRepository.save(mapper.map(newUserRequest, User.class));
+    }
 
 
 
