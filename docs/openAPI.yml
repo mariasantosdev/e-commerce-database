@@ -819,6 +819,3 @@ tags:
     description: Planos  
   - name: Users
     description: Usuarios
-  - name: Payments
-    description: Pagamentos
-       

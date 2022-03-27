@@ -40,6 +40,26 @@ class UserController {
         return userRepository.save(mapper.map(newUserRequest, User.class));
     }
 
+    @PutMapping("{userId}")
+    UserResponse update(@PathVariable Long userId,
+                        @RequestBody @Valid NewUserRequest newUserRequest){
+        final User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        this.mapper.map(newUserRequest, user);
+        this.userRepository.save(user);
+
+        return this.mapper.map(user, UserResponse.class);
+    }
+
+    @DeleteMapping("{userId}")
+    void delete(@PathVariable Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        userRepository.delete(user);
+    }
+
+
 
 
 }
