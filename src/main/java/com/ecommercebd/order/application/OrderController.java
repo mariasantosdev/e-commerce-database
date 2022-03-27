@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,18 +54,17 @@ class OrderController {
                 .orElseThrow(() -> new BusinessException(String.format("Usuário não encontrado", customerId)));
 
 
-        Plan plans = (Plan) order.getPlans();
-        Long planId = plans.getId();
+        List<Plan> plans = new ArrayList<>();
+        for (Plan plan : order.getPlans()) {
+            Plan planFound = planRepository.findById(plan.getId())
+                    .orElseThrow(() -> new BusinessException(String.format("Plano não encontrado", plan.getId())));
 
+            plans.add(planFound);
+        }
 
-        //List<Plan> plans = order.getPlans();
-        //List<Plan> planId = plans.get
-
-        plans = planRepository.findById(planId)
-                .orElseThrow(() -> new BusinessException(String.format("Plano não encontrado", planId)));
 
         order.setCustomer(customer);
-        order.setPlans((List<Plan>) plans);
+        order.setPlans(plans);
 
         orderRepository.save(order);
         return this.mapper.map(order, OrderResponse.class);

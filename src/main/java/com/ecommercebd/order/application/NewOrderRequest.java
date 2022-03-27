@@ -2,6 +2,7 @@ package com.ecommercebd.order.application;
 
 import com.ecommercebd.order.domain.Order;
 import com.ecommercebd.plan.domain.Plan;
+import com.ecommercebd.user.application.UserId;
 import com.ecommercebd.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -28,9 +29,9 @@ class NewOrderRequest {
     @JsonProperty
     private BigDecimal subtotal;
     @NotNull  @Valid
-    private User customer;
+    private UserId customer;
     @NotNull  @Valid
-    private List<Plan> plans = new ArrayList<>();
+    private List<PlanId> plans = new ArrayList<>();
 
 
 }
