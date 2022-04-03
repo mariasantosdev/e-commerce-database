@@ -1,12 +1,17 @@
-package com.ecommercebd.user;
+package com.ecommercebd.user.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "`user`")
 public class User {
     @Id
@@ -16,5 +21,8 @@ public class User {
     private String password;
     private String phone;
     private String cpf;
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
+
+
 }
