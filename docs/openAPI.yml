@@ -17,7 +17,7 @@ servers:
     url: 'https://api.lovelace.com'
 
 components:
-  schemas: 
+  schemas:
     Page:
       type: object
       required:
@@ -100,7 +100,7 @@ components:
         - name
       type: object
       properties:
-        id: 
+        id:
           type: integer
           format: int64
           example: 1
@@ -135,11 +135,36 @@ components:
           type: string
           example: 'Maria db'
 
+    UpdateOrderRequest:
+      required:
+        - subtotal
+        - customer
+      type: object
+      properties:
+        subtotal:
+          type: number
+          format: double
+          example: 10.8
+        customer:
+          type: integer
+          format: int64
+          example: 1
+
     NewOrderRequest:
       required:
+        - subtotal
+        - customer
         - plans
       type: object
       properties:
+        subtotal:
+          type: number
+          format: double
+          example: 250.40
+        customer:
+          type: integer
+          format: int64
+          example: 1
         plans:
           type: array
           items:
@@ -163,11 +188,10 @@ components:
           example: 10.8
         customer:
           $ref: '#/components/schemas/CustomerId'
-        plans: 
+        plans:
           type: array
           items:
-            $ref: '#/components/schemas/PlanId' 
-
+            $ref: '#/components/schemas/PlanId'
 
     CustomerId:
       required:
@@ -179,26 +203,262 @@ components:
           format: int64
           example: 1
 
+    UserResponse:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'CLIENT' 
+
+    NewUserRequest:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'CLIENT'
+
+    UpdateUserRequest:
+      required:
+        - id
+        - email
+        - password
+        - phone
+        - cpf
+        - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: 'Maria db'
+        password:
+          type: string
+          example: 'Test#01*' 
+        phone:
+          type: string
+          example: '(61)3300-5564'   
+        cpf:
+          type: string
+          example: '000.001.005-81'  
+        role:
+          type: string
+          enum: [ADMIN, CLIENT]
+          example: 'ADMIN'
+    
+    PlanResponse:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1   
+
+    NewPlanRequest:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1 
+
+    UpdatePlanRequest:
+      required:
+        - id
+        - price
+        - name
+        - description
+        - characteristic
+        - storage
+        - limitOfConnections
+        - limitOfUsers
+        - product
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: double
+          example: 150.8
+        name:
+          type: string
+          example: 'Basico' 
+        description:
+          type: string
+          example: 'Plano Básico - Sem servidor'   
+        characteristic:
+          type: string
+          example: 'Ideal para uso em aplicativos sem servidor e com tráfego baixo ou variável.'  
+        storage:
+          type: integer
+          format: int64
+          example: 1
+        limitOfConnections:
+          type: integer
+          format: int64
+          example: 10    
+        limitOfUsers:
+          type: integer
+          format: int64
+          example: 5
+        product:
+          type: integer
+          format: int64
+          example: 1             
+        
+
+
   responses:
     NotFound:
       description: Recurso não encontrado
       content:
         application/json:
           schema:
-              $ref: '#/components/schemas/Problem'
+            $ref: '#/components/schemas/Problem'
     BadRequest:
       description: Requisição inválida
       content:
         application/json:
           schema:
-              $ref: '#/components/schemas/Problem'       
+            $ref: '#/components/schemas/Problem'
 
 paths:
   /products:
     get:
       operationId: getProducts
-      summary: Listagem de produtos
-      tags: 
+      summary: Listagem de Produtos
+      tags:
         - Products
       responses:
         '200':
@@ -211,7 +471,7 @@ paths:
                   $ref: '#/components/schemas/ProductResponse'
     post:
       operationId: postProducts
-      summary: Cadastro de produtos
+      summary: Cadastro de Produtos
       tags:
         - Products
       requestBody:
@@ -225,7 +485,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/ProductResponse'
+                $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
 
@@ -239,7 +499,7 @@ paths:
         required: true
     get:
       operationId: getProduct
-      summary: Busca um produto
+      summary: Busca um Produto
       tags:
         - Products
       responses:
@@ -267,12 +527,12 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/ProductResponse'
+                $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
     delete:
       operationId: deleteProduct
-      summary: Deleta um produto
+      summary: Deleta um Produto
       tags:
         - Products
       responses:
@@ -282,6 +542,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 
   /orders:
+    get:
+      operationId: getOrders
+      summary: Listagem de Pedidos
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+
     post:
       operationId: postOrders
       summary: Cadastro de Pedidos
@@ -298,12 +573,249 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/OrderResponse'
+                $ref: '#/components/schemas/OrderResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
+
+  /orders/{orderId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: orderId
+        in: path
+        required: true
+    get:
+      operationId: getOrder
+      summary: Busca um Pedido
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    
+    put:
+      operationId: putOrders
+      summary: Atualização de Pedido
+      tags:
+        - Orders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Pedido atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    
+    delete:
+      operationId: deleteOrder
+      summary: Deleta um Pedido
+      tags:
+        - Orders
+      responses:
+        '204':
+          description: Pedido deletado
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /user: 
+    get:
+      operationId: getUsers
+      summary: Listagem de Usuarios
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'      
+    post:
+      operationId: postUsers
+      summary: Cadastro de Usuarios
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUserRequest'
+      responses:
+        '201':
+          description: Usuario criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /user/{userId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: userId
+        in: path
+        required: true
+    get:
+      operationId: getUser
+      summary: Busca um Usuario
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      operationId: putUsers
+      summary: Atualização de Usuario
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Usuario atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    
+    delete:
+      operationId: deleteUser
+      summary: Deleta um usuario
+      tags:
+        - Users
+      responses:
+        '204':
+          description: Usuario deletado
+        '404':
+          $ref: '#/components/responses/NotFound'      
+
+  /plan: 
+    get:
+      operationId: getPlans
+      summary: Listagem de Planos
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanResponse'      
+    post:
+      operationId: postPlans
+      summary: Cadastro de Planos
+      tags:
+        - Plans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPlanRequest'
+      responses:
+        '201':
+          description: Plano criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /plan/{planId}:
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: planId
+        in: path
+        required: true
+    get:
+      operationId: getPlan
+      summary: Busca um Plano
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      operationId: putPlans
+      summary: Atualização de Plano
+      tags:
+        - Plans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanRequest'
+      responses:
+        '200':
+          description: Plano atualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    
+    delete:
+      operationId: deletePlan
+      summary: Deleta um Plano
+      tags:
+        - Plans
+      responses:
+        '204':
+          description: Plano deletado
+        '404':
+          $ref: '#/components/responses/NotFound'              
+
 
 tags:
   - name: Products
     description: Produtos
   - name: Orders
     description: Pedidos  
+  - name: Plans
+    description: Planos  
+  - name: Users
+    description: Usuarios

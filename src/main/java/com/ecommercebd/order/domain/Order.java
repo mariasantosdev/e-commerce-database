@@ -1,7 +1,11 @@
-package com.ecommercebd.order;
+package com.ecommercebd.order.domain;
 
 import com.ecommercebd.plan.domain.Plan;
-import com.ecommercebd.user.User;
+import com.ecommercebd.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "`order`")
 public class Order {
     @Id
@@ -21,7 +29,7 @@ public class Order {
     @JoinColumn(name = "customer_id", 
             foreignKey = @ForeignKey(name = "fk_order_customer_id"))
     private User customer;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_plans",
             joinColumns = @JoinColumn(name = "order_id", 
                     foreignKey = @ForeignKey(name = "fk_order_plans_order_id")),
