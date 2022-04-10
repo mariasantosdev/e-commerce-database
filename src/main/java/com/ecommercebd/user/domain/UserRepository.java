@@ -10,4 +10,5 @@ public interface UserRepository {
     User save(User entity);
     Optional<User> findById(Long id);
     void delete(User entity);
+
 }

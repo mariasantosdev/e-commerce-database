@@ -41,7 +41,6 @@ class OrderController {
                 .orElseThrow(() -> new NotFoundException("Pedido não encontrado."));
     }
 
-    //TODO Adicionar o cadastro de um plano quando realizar o pedido
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     OrderResponse create(@RequestBody @Valid NewOrderRequest newOrderRequest){
