@@ -7,6 +7,7 @@ import com.ecommercebd.user.domain.User;
 import com.ecommercebd.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ class UserController {
 
     private final Mapper mapper;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     List<UserResponse> findAll(){
@@ -37,7 +39,10 @@ class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     User create(@RequestBody @Valid NewUserRequest newUserRequest){
-        return userRepository.save(mapper.map(newUserRequest, User.class));
+        User user = mapper.map(newUserRequest, User.class);
+        user.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
+        return userRepository.save(user);
+
     }
 
     @PutMapping("{userId}")

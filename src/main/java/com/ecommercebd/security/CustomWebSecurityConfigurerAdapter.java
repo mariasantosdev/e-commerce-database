@@ -24,6 +24,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
                 .authenticated()
                 .and()
                 .userDetailsService(userDetailsService)
+                .csrf().disable()
                 .httpBasic();
     }
 
