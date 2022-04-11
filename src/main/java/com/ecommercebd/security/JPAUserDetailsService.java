@@ -25,7 +25,7 @@ public class JPAUserDetailsService implements UserDetailsService {
 
         final Role role = user.getRole();
 
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.name());
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_"+role.name());
 
         return new User(
                 user.getEmail(),

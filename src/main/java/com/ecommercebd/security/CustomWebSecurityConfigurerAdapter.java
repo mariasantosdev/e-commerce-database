@@ -27,10 +27,10 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users")
-                .permitAll()
+                .antMatchers(HttpMethod.GET,"/products", "/products/{\\d+}", "/orders")
+                .hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
+                .hasRole("ADMIN")
                 .and()
                 .userDetailsService(userDetailsService)
                 .csrf().disable()
