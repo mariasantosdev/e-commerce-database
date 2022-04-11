@@ -7,6 +7,7 @@ import com.ecommercebd.order.domain.OrderRepository;
 import com.ecommercebd.plan.application.BusinessException;
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.plan.domain.PlanRepository;
+import com.ecommercebd.security.IsAdmin;
 import com.ecommercebd.user.domain.User;
 import com.ecommercebd.user.domain.UserRepository;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/orders")
+@IsAdmin
 class OrderController {
 
     private final Mapper mapper;

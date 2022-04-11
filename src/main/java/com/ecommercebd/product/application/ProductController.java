@@ -4,6 +4,7 @@ import com.ecommercebd.exception.NotFoundException;
 import com.ecommercebd.mapper.Mapper;
 import com.ecommercebd.product.domain.Product;
 import com.ecommercebd.product.domain.ProductRepository;
+import com.ecommercebd.security.IsAdmin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,13 @@ class ProductController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@IsAdmin
 	Product create(@RequestBody @Valid NewProductRequest newProductRequest) {
 		return productRepository.save(mapper.map(newProductRequest, Product.class));
 	}
 
 	@PutMapping("{productId}")
+	@IsAdmin
 	ProductResponse update(@PathVariable Long productId,
 						@RequestBody @Valid NewProductRequest newProductRequest) {
 		final Product product = productRepository.findById(productId)
@@ -52,6 +55,7 @@ class ProductController {
 	}
 
 	@DeleteMapping("{productId}")
+	@IsAdmin
 	void delete(@PathVariable Long productId) {
 		Product product = productRepository.findById(productId)
 				.orElseThrow(() -> new NotFoundException("Produto não encontrado."));
