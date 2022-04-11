@@ -38,11 +38,12 @@ class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    User create(@RequestBody @Valid NewUserRequest newUserRequest){
+    UserResponse create(@RequestBody @Valid NewUserRequest newUserRequest){
         User user = mapper.map(newUserRequest, User.class);
         user.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
-        return userRepository.save(user);
+        user = this.userRepository.save(user);
 
+        return this.mapper.map(user, UserResponse.class);
     }
 
     @PutMapping("{userId}")
