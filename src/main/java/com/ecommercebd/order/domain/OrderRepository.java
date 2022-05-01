@@ -8,6 +8,10 @@ public interface OrderRepository {
     List<Order> findAll();
     Order save(Order entity);
     Optional<Order> findById(Long id);
+
+    List<Order> findAllByCustomerEmail(String email);
+
+    Optional<Order> findByIdAndCustomerEmail(Long id, String email);
     void delete(Order entity);
 
 }
