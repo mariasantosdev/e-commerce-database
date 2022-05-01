@@ -7,6 +7,7 @@ import com.ecommercebd.order.domain.OrderRepository;
 import com.ecommercebd.plan.application.BusinessException;
 import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.plan.domain.PlanRepository;
+import com.ecommercebd.security.IsAdmin;
 import com.ecommercebd.user.domain.User;
 import com.ecommercebd.user.domain.UserRepository;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/orders")
+@IsAdmin
 class OrderController {
 
     private final Mapper mapper;
@@ -41,7 +43,6 @@ class OrderController {
                 .orElseThrow(() -> new NotFoundException("Pedido não encontrado."));
     }
 
-    //TODO Adicionar o cadastro de um plano quando realizar o pedido
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     OrderResponse create(@RequestBody @Valid NewOrderRequest newOrderRequest){
@@ -81,6 +82,7 @@ class OrderController {
         this.orderRepository.save(order);
         return this.mapper.map(order, OrderResponse.class);
     }
+
 
     @DeleteMapping("{orderId}")
     void delete(@PathVariable Long orderId){

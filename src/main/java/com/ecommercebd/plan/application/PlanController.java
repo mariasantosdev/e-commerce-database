@@ -6,6 +6,7 @@ import com.ecommercebd.plan.domain.Plan;
 import com.ecommercebd.plan.domain.PlanRepository;
 import com.ecommercebd.product.domain.Product;
 import com.ecommercebd.product.domain.ProductRepository;
+import com.ecommercebd.security.IsAdmin;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,6 +50,7 @@ class PlanController {
     @ResponseStatus(HttpStatus.CREATED)
         //TODO alterar esse método create para retornar PlanResponse
     //TODO Ta dando 500 ao cadastrar duas vezes o mesmo registro - tratar
+    @IsAdmin
     PlanResponse create(@RequestBody @Valid NewPlanRequest newPlanRequest) {
         Plan plan = mapper.map(newPlanRequest, Plan.class);
 
@@ -64,6 +66,7 @@ class PlanController {
     }
 
     @PutMapping("{planId}")
+    @IsAdmin
     PlanResponse update(@PathVariable Long planId,
                         @RequestBody @Valid NewPlanRequest newPlanRequest) {
         final Plan plan = planRepository.findById(planId)
@@ -76,6 +79,7 @@ class PlanController {
     }
 
     @DeleteMapping("{planId}")
+    @IsAdmin
     void delete(@PathVariable Long planId) {
         Plan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new NotFoundException("Plano não encontrado."));
