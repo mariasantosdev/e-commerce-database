@@ -74,8 +74,4 @@ class UserController {
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
         userRepository.delete(user);
     }
-
-
-
-
 }
