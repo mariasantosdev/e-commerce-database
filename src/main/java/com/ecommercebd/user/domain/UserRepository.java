@@ -9,4 +9,5 @@ public interface UserRepository {
     Optional<User> findById(Long id);
     void delete(User entity);
     Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
 }
