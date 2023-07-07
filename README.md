@@ -19,5 +19,3 @@ E-commerce para realizar a venda de diversos banco de dados
 
 - Diagrama de Caso de uso:
 ![imagem com diagrama de caso de uso](https://github.com/mariasantosdev/e-commerce-database/blob/master/docs/useCaseDiagram.svg)
-
-teste
